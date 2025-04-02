@@ -187,10 +187,8 @@ const needsList = [
       title: "Is this item a Need or a Want?",
       html: `<div class="current-item">${item}</div>`,
       showDenyButton: true,
-      showCancelButton: true,
       confirmButtonText: "Need",
       denyButtonText: "Want",
-      cancelButtonText: "Both",
       allowOutsideClick: false,
       allowEscapeKey: false,
       didOpen: () => {
@@ -204,8 +202,6 @@ const needsList = [
         answer = "need"
       } else if (result.isDenied) {
         answer = "want"
-      } else {
-        answer = "both"
       }
   
       checkAnswer(answer)
@@ -223,9 +219,6 @@ const needsList = [
     } else if (currentItemType === "want" && answer === "want") {
       isCorrect = true
       message = `Correct! ${currentItem} is a want.`
-    } else if (answer === "both") {
-      // Some items could be both, but for simplicity we're using the predefined lists
-      message = `${currentItem} is primarily a ${currentItemType}.`
     } else {
       isCorrect = false
       message = `Incorrect. ${currentItem} is a ${currentItemType}.`
@@ -372,7 +365,6 @@ const needsList = [
               <ul>
                 <li><strong>Need:</strong> Essential items for survival (food, water, shelter, etc.)</li>
                 <li><strong>Want:</strong> Non-essential items that are desirable but not required</li>
-                <li><strong>Both:</strong> Some items could be considered both</li>
               </ul>
             </li>
             
