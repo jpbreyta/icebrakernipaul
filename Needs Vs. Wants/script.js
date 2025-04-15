@@ -52,14 +52,14 @@ let livesGroup2 = 5;
 let currentItem = "";
 let currentItemType = "";
 let timer = null;
-let timeLeft = 20;
+let timeLeft = 10;
 let activeBox = null;
 let activeGroup = null;
 
 function getRandomBombs() {
   const bombs = new Set();
   while (bombs.size < 5) {
-    bombs.add(Math.floor(Math.random() * 20) + 1);
+    bombs.add(Math.floor(Math.random() * 10) + 1);
   }
   return Array.from(bombs);
 }
@@ -118,7 +118,7 @@ function createBoxes(groupId) {
     bombIndexesGroup2 = getRandomBombs();
     bombIndexes = bombIndexesGroup2;
   }
-  for (let i = 1; i <= 20; i++) {
+  for (let i = 1; i <= 10; i++) {
     const box = document.createElement("div");
     box.classList.add("random-box");
     box.textContent = i;
@@ -251,7 +251,7 @@ function checkAnswer(answer) {
 }
 
 function startTimer() {
-  timeLeft = 20;
+  timeLeft = 10;
   updateTimerDisplay();
   if (timer) clearInterval(timer);
   timer = setInterval(() => {
@@ -269,7 +269,7 @@ function updateTimerDisplay() {
   const timerText = document.getElementById("timer-text");
   const timerBar = document.getElementById("timer-bar");
   timerText.textContent = `Time: ${timeLeft}s`;
-  timerBar.style.width = `${(timeLeft / 20) * 100}%`;
+  timerBar.style.width = `${(timeLeft / 10) * 100}%`;
   if (timeLeft <= 5) {
     timerBar.className = "progress-bar bg-danger";
   } else if (timeLeft <= 10) {
@@ -280,7 +280,7 @@ function updateTimerDisplay() {
 }
 
 function resetTimer() {
-  timeLeft = 20;
+  timeLeft = 10;
   updateTimerDisplay();
   if (timer) {
     clearInterval(timer);
