@@ -434,19 +434,15 @@ const needsList = [
     })
   }
   
-  // Initialize game when page loads
   window.onload = () => {
-    // Check if Swal is defined, if not, try to load it from CDN
     if (typeof Swal === "undefined") {
       const script = document.createElement("script")
       script.src = "https://cdn.jsdelivr.net/npm/sweetalert2@11"
       script.onload = () => {
-        // Swal is now available, proceed with initialization
         initializeGame()
       }
       document.head.appendChild(script)
     } else {
-      // Swal is already defined, proceed with initialization
       initializeGame()
     }
   
@@ -455,13 +451,10 @@ const needsList = [
       createBoxes("group2")
       updateLivesDisplay()
   
-      // Add event listeners to buttons
       document.getElementById("play-button").addEventListener("click", startGame)
       document.getElementById("restart-button").addEventListener("click", restartGame)
       document.getElementById("info-button").addEventListener("click", showInstructions)
-  
-      // Show instructions on first load
-      showInstructions()
+
     }
   }
   

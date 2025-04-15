@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Snake Game</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <!-- SweetAlert2 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.min.css">
+  <style>
+    body {
+      /* Forest background image */
+      background: url('https://source.unsplash.com/1600x900/?forest') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 20px 30px;
+      border-radius: 10px;
+    }
+    #game-board {
+      width: 400px;
+      height: 400px;
+      background-color: #004d00; /* dark forest green */
+      position: relative;
+      border: 3px solid #00FF00;
+      box-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
+      margin: auto;
+    }
+    .snake {
+      background-color: #00FF00;
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+    }
+    .food {
+      background-color: red;
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+    }
+    .score {
+      font-size: 1.5rem;
+      margin-top: 20px;
+      color: #fff;
+    }
+    .btn-start {
+      margin-top: 20px;
+    }
+    label, .form-control {
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1 class="text-light">Snake Game</h1>
+    <div id="game-board"></div>
+    <div class="score">Score: <span id="score">0</span></div>
+    <!-- Level Selector -->
+    <div class="form-group mt-3">
+      <label for="level-select">Select Level:</label>
+      <select id="level-select" class="form-control">
+        <option value="150">Easy</option>
+        <option value="100" selected>Medium</option>
+        <option value="75">Hard</option>
+        <option value="50">Extreme</option>
+      </select>
+    </div>
+    <button id="start-button" class="btn btn-success btn-start">Start Game</button>
+  </div>
+
+  <!-- SweetAlert2 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- Link to our JavaScript file -->
+  <script src="script.js"></script>
+</body>
+</html>

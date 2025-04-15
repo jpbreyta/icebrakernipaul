@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lucky 7 Game</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      color: #ffd700;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(45deg, #8B0000, #4B0082, #ff4500);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
+      overflow: hidden;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      text-shadow: 0 0 15px #ffd700, 0 0 25px #ffd700;
+    }
+
+    .slot-machine {
+      display: flex;
+      gap: 20px;
+      margin: 20px 0;
+    }
+
+    .slot {
+      width: 80px;
+      height: 80px;
+      background: #1e1e1e;
+      border: 3px solid #ffd700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #ffd700aa;
+      animation: pop 0.3s ease-in-out;
+    }
+
+    @keyframes roll {
+      0%   { transform: translateY(0); opacity: 1; }
+      50%  { transform: translateY(-20px); opacity: 0.6; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes pop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+
+    button {
+      padding: 10px 25px;
+      font-size: 18px;
+      background: #ffd700;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+      box-shadow: 0 0 10px #ffd700;
+    }
+
+    button:hover {
+      background: #e6c200;
+      box-shadow: 0 0 20px #ffd700;
+    }
+
+    .result {
+      font-size: 24px;
+      margin-top: 20px;
+      height: 30px;
+      text-shadow: 0 0 10px #ffd70088;
+      color: #fff;
+    }
+
+    .casino-light {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0));
+      animation: casinoGlow 4s ease infinite;
+      z-index: -1;
+    }
+
+    @keyframes casinoGlow {
+      0% { opacity: 0.2; }
+      50% { opacity: 1; }
+      100% { opacity: 0.2; }
+    }
+  </style>
+</head>
+<body>
+  <div class="casino-light"></div>
+  <h1>Lucky 7 Game</h1>
+  <div class="slot-machine">
+    <div class="slot" id="slot1">?</div>
+    <div class="slot" id="slot2">?</div>
+    <div class="slot" id="slot3">?</div>
+  </div>
+  <button onclick="spin()">Spin</button>
+  <div class="result" id="result"></div>
+
+  <script>
+    function animateRoll(slotElement, finalNumber) {
+      let rollCount = 15;
+      let interval = 50;
+      let current = 0;
+
+      const rollInterval = setInterval(() => {
+        const num = Math.floor(Math.random() * 7) + 1;
+        slotElement.textContent = num;
+        slotElement.style.animation = 'roll 0.2s';
+        setTimeout(() => slotElement.style.animation = '', 200);
+        current++;
+
+        if (current >= rollCount) {
+          clearInterval(rollInterval);
+          slotElement.textContent = finalNumber;
+          slotElement.style.animation = 'pop 0.3s';
+        }
+      }, interval);
+    }
+
+    function spin() {
+      const final1 = Math.floor(Math.random() * 7) + 1;
+      const final2 = Math.floor(Math.random() * 7) + 1;
+      const final3 = Math.floor(Math.random() * 7) + 1;
+
+      const slot1 = document.getElementById('slot1');
+      const slot2 = document.getElementById('slot2');
+      const slot3 = document.getElementById('slot3');
+      const result = document.getElementById('result');
+      result.textContent = "";
+
+      animateRoll(slot1, final1);
+      animateRoll(slot2, final2);
+      animateRoll(slot3, final3);
+
+      setTimeout(() => {
+        if (final1 === 7 && final2 === 7 && final3 === 7) {
+          result.textContent = "🎉 JACKPOT! Lucky 7!";
+        } else {
+          result.textContent = "Try again!";
+        }
+      }, 800);
+    }
+  </script>
+</body>
+</html>
